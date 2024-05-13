@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <div>
+            <h1>Signup Page</h1>
+        </div>
+        <div>
+            <label for="">email</label>
+            <input type="text" name="email" id="">
+        </div>
+        <div>
+            <label for="">password</label>
+            <input type="text" name="password" id="">
+        </div>
+        <div>
+            <button>Signup</button>
+        </div>
+        
+    </form>
+
+    <script>
+        let form = document.querySelector('form')
+
+        form.addEventListener('submit', (e)=>{
+            e.preventDefault();
+
+            let email = form.email.value;
+            let password = form.password.value;
+
+            console.log(email, password)
+        })
+    </script>
+</body>
+    
+</html>
