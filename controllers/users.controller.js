@@ -38,6 +38,23 @@ exports.getOne = async (req, res)=>{
         res.status(500).send({message:"Could not get the user", err})
     }
 }
+
+exports.getUsersWithLongPasswords = async (req, res) => {
+    try {
+        const usersWithLongPasswords = await User.find({
+            $where: 'this.password.length > 10'
+        });
+
+        if (!usersWithLongPasswords || usersWithLongPasswords.length === 0) {
+            return res.status(404).send("No users found with passwords longer than 10 characters.");
+        }
+
+        res.status(200).send(usersWithLongPasswords);
+    } catch (err) {
+        res.status(500).send("Could not retrieve users with long passwords.", err);
+    }
+}
+
 exports.updateOne = async (req, res)=>{
     try{
         
