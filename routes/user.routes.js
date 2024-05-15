@@ -10,6 +10,9 @@ router.get('/user', user.getOne)
 router.put('/user/:id', user.updateOne)
 router.get("/user",auth.verifyToken,user.user_dBoard);
 router.get("/admin",[auth.verifyToken, auth.isAdmin],user.admin_dBoard);
+router.delete('/users/:id', user.deleteOne);
+router.delete('/users', user.deleteAll);
+
 
 
 

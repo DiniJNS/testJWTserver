@@ -64,6 +64,36 @@ exports.updateOne = async (req, res)=>{
     }
 }
 
+exports.deleteOne = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).send("User ID is required.");
+        }
+
+        const deletedUser = await User.findByIdAndDelete(id);
+
+        if (!deletedUser) {
+            return res.status(404).send("User not found.");
+        }
+
+        res.status(200).send("User deleted successfully.");
+    } catch (err) {
+        res.status(500).send("Could not delete the user.", err);
+    }
+};
+
+exports.deleteAll = async (req, res) => {
+    try {
+        await User.deleteMany({});
+        res.status(200).send("All users deleted successfully.");
+    } catch (err) {
+        res.status(500).send("Could not delete all users.", err);
+    }
+};
+
+
 exports.allAccess = (req, res) => {
     res.status(200).send("Public Content.");
   };
