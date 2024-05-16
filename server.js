@@ -17,9 +17,9 @@ app.use(express.json())
 
 app.use(express.static('public'))
 
-mongoose.connect(db.uri)
+mongoose.connect("mongodb://0.0.0.0:27017/db")
     .then(()=>{
-        console.log("Connected successfully to DB!")
+        console.log("Connected successfully to the DB!")
     })
     .catch((error)=>{
         console.log("Could not connect to DB due some error:", error),

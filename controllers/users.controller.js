@@ -38,6 +38,23 @@ exports.getOne = async (req, res)=>{
         res.status(500).send({message:"Could not get the user", err})
     }
 }
+
+exports.getUsersWithLongPasswords = async (req, res) => {
+    try {
+        const usersWithLongPasswords = await User.find({
+            $where: 'this.password.length > 10'
+        });
+
+        if (!usersWithLongPasswords || usersWithLongPasswords.length === 0) {
+            return res.status(404).send("No users found with passwords longer than 10 characters.");
+        }
+
+        res.status(200).send(usersWithLongPasswords);
+    } catch (err) {
+        res.status(500).send("Could not retrieve users with long passwords.", err);
+    }
+}
+
 exports.updateOne = async (req, res)=>{
     try{
         
@@ -63,6 +80,36 @@ exports.updateOne = async (req, res)=>{
         res.status(500).send({message:"Could not get the user", err})
     }
 }
+
+exports.deleteOne = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).send("User ID is required.");
+        }
+
+        const deletedUser = await User.findByIdAndDelete(id);
+
+        if (!deletedUser) {
+            return res.status(404).send("User not found.");
+        }
+
+        res.status(200).send("User deleted successfully.");
+    } catch (err) {
+        res.status(500).send("Could not delete the user.", err);
+    }
+};
+
+exports.deleteAll = async (req, res) => {
+    try {
+        await User.deleteMany({});
+        res.status(200).send("All users deleted successfully.");
+    } catch (err) {
+        res.status(500).send("Could not delete all users.", err);
+    }
+};
+
 
 exports.allAccess = (req, res) => {
     res.status(200).send("Public Content.");
