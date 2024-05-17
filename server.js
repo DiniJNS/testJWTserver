@@ -53,7 +53,7 @@ app.get('/login', (req, res)=>{
 
 
 
-app.listen(PORT, ()=>{
-    console.log("Listening @ port:", PORT)
+app.listen(process.env.PORT, ()=>{
+    console.log("Listening @ port:", process.env.PORT)
 })
 
