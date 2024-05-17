@@ -14,7 +14,6 @@ dotenv.config();
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-
 app.use(express.static('public'))
 
 mongoose.connect(db.uri)
@@ -30,7 +29,6 @@ mongoose.connect(db.uri)
 
 app.use('/v1/users', userRoutes);
 app.use('/v1/auth', authRoutes)
-
 
 
 app.get('/', (req, res)=>{
