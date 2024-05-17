@@ -15,7 +15,6 @@ dotenv.config();
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-
 app.use(express.static('public'))
 app.use(cors())
 
@@ -32,7 +31,6 @@ mongoose.connect(process.env.TestJWTServer)
 
 app.use('/v1/users', userRoutes);
 app.use('/v1/auth', authRoutes)
-
 
 
 app.get('/', (req, res)=>{
@@ -55,7 +53,7 @@ app.get('/login', (req, res)=>{
 
 
 
-app.listen(process.env.PORT, ()=>{
-    console.log("Listening @ port:", process.env.PORT)
+app.listen(PORT, ()=>{
+    console.log("Listening @ port:", PORT)
 })
 
