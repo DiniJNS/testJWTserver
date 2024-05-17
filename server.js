@@ -7,7 +7,8 @@ const userRoutes  = require('./routes/user.routes')
 const authRoutes  = require('./routes/auth.routes')
 
 const path = require('path')
-const dotenv = require('dotenv');
+const dotenv = require('dotenv')
+const cors = require('cors');
 
 // Set up Global configuration access
 dotenv.config();
@@ -16,8 +17,9 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 app.use(express.static('public'))
+app.use(cors())
 
-mongoose.connect("mongodb://0.0.0.0:27017/db")
+mongoose.connect(process.env.TestJWTServer)
     .then(()=>{
         console.log("Connected successfully to the DB!")
     })
